@@ -114,6 +114,24 @@ const updateTaskIfDone = (req, res) => {
     });
 };
 
+const updateTaskIfArchived = (req, res) => {
+  const task = req.body;
+  task.task_id = parseInt(req.params.id, 10);
+  models.task
+    .updateTaskIfArchived(task)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   getAllTasks,
   getTaskById,
@@ -122,4 +140,5 @@ module.exports = {
   updateTaskTitle,
   updateTaskDetail,
   updateTaskIfDone,
+  updateTaskIfArchived,
 };
