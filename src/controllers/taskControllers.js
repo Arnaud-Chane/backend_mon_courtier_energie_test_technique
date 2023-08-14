@@ -30,7 +30,25 @@ const getTaskById = (req, res) => {
     });
 };
 
+const getTaskByUserId = (req, res) => {
+  const userId = req.params.id;
+  models.task
+    .findTaskByUserId(userId)
+    .then(([task]) => {
+      if (task[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(task);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   getAllTasks,
   getTaskById,
+  getTaskByUserId,
 };
