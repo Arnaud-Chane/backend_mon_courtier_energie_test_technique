@@ -60,9 +60,28 @@ const createTask = (req, res) => {
     });
 };
 
+const updateTaskTitle = (req, res) => {
+  const task = req.body;
+  task.task_id = parseInt(req.params.id, 10);
+  models.task
+    .updateTaskTitle(task)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   getAllTasks,
   getTaskById,
   getTaskByUserId,
   createTask,
+  updateTaskTitle,
 };
