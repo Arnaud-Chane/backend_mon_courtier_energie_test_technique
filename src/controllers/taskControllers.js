@@ -47,8 +47,22 @@ const getTaskByUserId = (req, res) => {
     });
 };
 
+const createTask = (req, res) => {
+  const task = req.body;
+  models.task
+    .addTask(task)
+    .then(([result]) => {
+      res.location(`/tasks/${result.insertId}`).sendStatus(201);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   getAllTasks,
   getTaskById,
   getTaskByUserId,
+  createTask,
 };
