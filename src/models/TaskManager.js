@@ -32,6 +32,13 @@ class TaskManager extends AbstractManager {
     );
   }
 
+  updateTaskDetail(tasks) {
+    return this.database.query(
+      `UPDATE ${this.table} SET detail = ? WHERE task_id = ?`,
+      [tasks.detail, tasks.task_id]
+    );
+  }
+
 }
 
 module.exports = TaskManager;
