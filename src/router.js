@@ -6,6 +6,7 @@ const userControllers = require("./controllers/userControllers");
 const taskControllers = require("./controllers/taskControllers");
 
 router.get("/users", userControllers.getAllUsers);
+router.get("/users/:id", userControllers.getUserById);
 
 router.get("/users/:id/tasks", taskControllers.getTaskByUserId);
 router.get("/tasks", taskControllers.getAllTasks);
