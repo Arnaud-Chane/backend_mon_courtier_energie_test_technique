@@ -30,7 +30,27 @@ const getUserById = (req, res) => {
     });
 };
 
+const createUser = (req, res) => {
+  const user = req.body;
+  if(user.is_admin === true) {
+    user.is_admin = 1;
+  } else {
+    user.is_admin = 0;
+  }
+
+  models.user
+    .addUser(user)
+    .then(([result]) => {
+      res.location(`/users/${result.insertId}`).sendStatus(201);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
+  createUser,
 };
