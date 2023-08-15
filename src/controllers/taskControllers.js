@@ -99,6 +99,11 @@ const updateTaskDetail = (req, res) => {
 const updateTaskIfDone = (req, res) => {
   const task = req.body;
   task.task_id = parseInt(req.params.id, 10);
+  if(task.task_done) {
+     task.task_done = 1;
+  } else {
+     task.task_done = 0;
+  }
   models.task
     .updateTaskIfDone(task)
     .then(([result]) => {
