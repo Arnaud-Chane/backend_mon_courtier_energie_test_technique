@@ -84,10 +84,35 @@ const deleteUser = (req, res) => {
     });
 };
 
+const getUserInformation = (req, res) => {
+  const userId = req.user_id;
+
+  models.user
+    .find(userId)
+    .then(([user]) => {
+      if (user) {
+        const userInfo = {
+          userId: user[0].user_id,
+          pseudo: user[0].pseudo,
+          email: user[0].email,
+          role: user[0].is_admin,
+        };
+        res.status(200).json(userInfo);
+      } else {
+        res.sendStatus(404);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
   updateUser,
   deleteUser,
+  getUserInformation,
 };
