@@ -19,5 +19,6 @@ CREATE TABLE `task` (
   `detail` TEXT,
   `task_done` INTEGER,
   `task_archived` INTEGER,
+  `task_priority` integer,
   FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 );
