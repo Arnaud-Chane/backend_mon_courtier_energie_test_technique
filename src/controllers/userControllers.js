@@ -49,8 +49,28 @@ const createUser = (req, res) => {
     });
 };
 
+const updateUser = (req, res) => {
+  const user = req.body;
+  user.user_id = parseInt(req.params.id, 10);
+
+  models.user
+    .updateUser(user)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   getAllUsers,
   getUserById,
   createUser,
+  updateUser,
 };
