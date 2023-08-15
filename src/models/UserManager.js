@@ -8,7 +8,7 @@ class UserManager extends AbstractManager {
   addUser(users) {
     return this.database.query(
       `insert into ${this.table} ( pseudo, email, password, is_admin ) values (?, ?, ?, ?)`,
-      [users.pseudo, users.email, users.hashedPassword, users.is_admin]
+      [users.pseudo, users.email, users.password, users.is_admin]
     );
   }
 
@@ -20,7 +20,7 @@ class UserManager extends AbstractManager {
 
   updateUser(users) {
     return this.database.query(
-      `update ${this.table} set pseudo = ?,   email = ?, is_admin = ? where user_id = ?`,
+      `update ${this.table} set pseudo = ?, email = ?, is_admin = ? where user_id = ?`,
       [users.pseudo, users.email, users.is_admin, users.user_id]
     );
   }
