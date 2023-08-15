@@ -2,12 +2,14 @@ const express = require("express");
 
 const router = express.Router();
 
+const { hashPassword } = require("./middlewares/auth");
+
 const userControllers = require("./controllers/userControllers");
 const taskControllers = require("./controllers/taskControllers");
 
 router.get("/users", userControllers.getAllUsers);
 router.get("/users/:id", userControllers.getUserById);
-router.post("/users", userControllers.createUser);
+router.post("/users", hashPassword, userControllers.createUser);
 router.put("/users/:id", userControllers.updateUser);
 router.delete("/users/:id", userControllers.deleteUser);
 
