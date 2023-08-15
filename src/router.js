@@ -2,7 +2,11 @@ const express = require("express");
 
 const router = express.Router();
 
-const { hashPassword, verifyPassword } = require("./middlewares/auth");
+const {
+  hashPassword,
+  verifyPassword,
+  verifyToken,
+} = require("./middlewares/auth");
 
 const userControllers = require("./controllers/userControllers");
 const taskControllers = require("./controllers/taskControllers");
@@ -12,6 +16,8 @@ router.post(
   userControllers.getUserByEmailWithPasswordAndPassToNext,
   verifyPassword
 );
+
+router.post("/verify-token", verifyToken, userControllers.getUserInformation);
 
 router.get("/users", userControllers.getAllUsers);
 router.get("/users/:id", userControllers.getUserById);
