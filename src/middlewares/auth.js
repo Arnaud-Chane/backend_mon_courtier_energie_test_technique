@@ -21,6 +21,25 @@ const hashPassword = (req, res, next) => {
     });
 };
 
+const verifyPassword = (req, res) => {
+  argon2
+
+    .verify(req.user.password, req.body.password)
+
+    .then((isVerified) => {
+      if (isVerified) {
+        res.sendStatus(201);
+      } else {
+        res.sendStatus(401);
+      }
+    })
+
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
 module.exports = {
   hashPassword,
+  verifyPassword,
 };
