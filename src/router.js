@@ -9,6 +9,7 @@ router.get("/users", userControllers.getAllUsers);
 router.get("/users/:id", userControllers.getUserById);
 router.post("/users", userControllers.createUser);
 router.put("/users/:id", userControllers.updateUser);
+router.delete("/users/:id", userControllers.deleteUser);
 
 router.get("/users/:id/tasks", taskControllers.getTaskByUserId);
 router.get("/tasks", taskControllers.getAllTasks);
