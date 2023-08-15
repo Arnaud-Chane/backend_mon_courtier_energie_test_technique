@@ -137,6 +137,25 @@ const updateTaskIfArchived = (req, res) => {
     });
 };
 
+
+const updateTaskPriority = (req, res) => {
+  const task = req.body;
+  task.task_id = parseInt(req.params.id, 10);
+  models.task
+    .updateTaskPriority(task)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const deleteTask = (req, res) => {
   models.task
     .delete(req.params.id)
@@ -162,5 +181,6 @@ module.exports = {
   updateTaskDetail,
   updateTaskIfDone,
   updateTaskIfArchived,
+  updateTaskPriority,
   deleteTask,
 };
