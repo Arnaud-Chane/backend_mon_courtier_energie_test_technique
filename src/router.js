@@ -12,6 +12,7 @@ router.put("/tasks/:id", taskControllers.updateTaskTitle);
 router.put("/tasks/:id/detail", taskControllers.updateTaskDetail);
 router.put("/tasks/is-done/:id", taskControllers.updateTaskIfDone);
 router.put("/tasks/is-archived/:id", taskControllers.updateTaskIfArchived);
+router.put("/tasks/:id/priority", taskControllers.updateTaskPriority);
 router.delete("/tasks/:id", taskControllers.deleteTask);
 
 module.exports = router;
