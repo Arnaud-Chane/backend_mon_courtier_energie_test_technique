@@ -53,6 +53,13 @@ class TaskManager extends AbstractManager {
       [tasks.task_archived, tasks.task_id]
     );
   }
+
+  updateTaskPriority(tasks) {
+    return this.database.query(
+      `UPDATE ${this.table} SET task_priority = ? WHERE task_id = ?`,
+      [tasks.task_priority, tasks.task_id]
+    );
+  }
 }
 
 module.exports = TaskManager;
