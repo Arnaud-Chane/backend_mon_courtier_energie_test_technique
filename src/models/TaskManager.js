@@ -7,13 +7,14 @@ class TaskManager extends AbstractManager {
 
   addTask(tasks) {
     return this.database.query(
-      `insert into ${this.table} ( title, detail, task_done, task_archived, task_priority ) values (?, ?, ?, ?, ?)`,
+      `insert into ${this.table} ( title, detail, task_done, task_archived, task_priority, due_date) values (?, ?, ?, ?, ?, ?)`,
       [
         tasks.title,
         tasks.detail,
         tasks.task_done,
         tasks.task_archived,
         tasks.task_priority,
+        tasks.due_date,
       ]
     );
   }
@@ -57,6 +58,13 @@ class TaskManager extends AbstractManager {
     return this.database.query(
       `UPDATE ${this.table} SET task_priority = ? WHERE task_id = ?`,
       [tasks.task_priority, tasks.task_id]
+    );
+  }
+
+  updateTaskDueDate(tasks) {
+    return this.database.query(
+      `UPDATE ${this.table} SET due_date = ? WHERE task_id = ?`,
+      [tasks.due_date, tasks.task_id]
     );
   }
 }

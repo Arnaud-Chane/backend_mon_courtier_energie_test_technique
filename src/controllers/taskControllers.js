@@ -137,12 +137,29 @@ const updateTaskIfArchived = (req, res) => {
     });
 };
 
-
 const updateTaskPriority = (req, res) => {
   const task = req.body;
   task.task_id = parseInt(req.params.id, 10);
   models.task
     .updateTaskPriority(task)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const updateTaskDueDate = (req, res) => {
+  const task = req.body;
+  task.task_id = parseInt(req.params.id, 10);
+  models.task
+    .updateTaskDueDate(task)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -182,5 +199,6 @@ module.exports = {
   updateTaskIfDone,
   updateTaskIfArchived,
   updateTaskPriority,
+  updateTaskDueDate,
   deleteTask,
 };

@@ -13,9 +13,9 @@ CREATE TABLE `task` (
   `due_date` VARCHAR(255)
 );
 
-INSERT INTO task (title, detail, task_done, task_archived, task_priority) 
+INSERT INTO task (title, detail, task_done, task_archived, task_priority, due_date) 
 VALUES 
-("tâche 1", "detail de la tâche 1", 0, 0, 1),
-("tâche 2", "detail de la tâche 2", 0, 0, 2),
-("tâche 3", "detail de la tâche 3", 0, 0, 3),
-("tâche 4", "detail de la tâche 4", 0, 0, 4);
+("tâche 1", "detail de la tâche 1", 0, 0, 1, "2023-08-31"),
+("tâche 2", "detail de la tâche 2", 0, 0, 2, "2023-08-31"),
+("tâche 3", "detail de la tâche 3", 0, 0, 3, "2023-08-31"),
+("tâche 4", "detail de la tâche 4", 0, 0, 4, "2023-08-31");
