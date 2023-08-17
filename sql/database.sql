@@ -20,5 +20,5 @@ CREATE TABLE `task` (
   `task_done` INTEGER,
   `task_archived` INTEGER,
   `task_priority` integer,
-  FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+  FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
 );
