@@ -7,13 +7,14 @@ class TaskManager extends AbstractManager {
 
   addTask(tasks) {
     return this.database.query(
-      `insert into ${this.table} ( title, detail, task_done, task_archived, task_priority ) values (?, ?, ?, ?, ?)`,
+      `insert into ${this.table} ( title, detail, task_done, task_archived, task_priority, due_date) values (?, ?, ?, ?, ?, ?)`,
       [
         tasks.title,
         tasks.detail,
         tasks.task_done,
         tasks.task_archived,
         tasks.task_priority,
+        tasks.due_date,
       ]
     );
   }
