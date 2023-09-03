@@ -19,8 +19,11 @@ CREATE TABLE `task` (
   `task_done` INTEGER,
   `task_archived` INTEGER,
   `task_priority` INTEGER,
-  `due_date` VARCHAR(255)
+  `due_date` VARCHAR(255),
+  `user_id` INTEGER
 );
+
+ALTER TABLE `task` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 INSERT INTO user (pseudo, email, password, is_admin)
 VALUES 
@@ -29,12 +32,12 @@ VALUES
   ("user2", 'robert.brown@example.com', "$argon2id$v=19$m=65536,t=5,p=1$03NmfWlLIBE0woTiJvADKA$VqPe3FJVqk28F0tpi1iAh62GyS2IO+tYM/seIjhhny4", 0),
   ("user3", 'julia.lee@example.com', "$argon2id$v=19$m=65536,t=5,p=1$03NmfWlLIBE0woTiJvADKA$VqPe3FJVqk28F0tpi1iAh62GyS2IO+tYM/seIjhhny4", 0),
   ("user4", 'alexandre.moreau@example.com', "$argon2id$v=19$m=65536,t=5,p=1$03NmfWlLIBE0woTiJvADKA$VqPe3FJVqk28F0tpi1iAh62GyS2IO+tYM/seIjhhny4", 0),
-  ("admin", 'test@gmail.com', "$argon2id$v=19$m=65536,t=5,p=1$03NmfWlLIBE0woTiJvADKA$VqPe3FJVqk28F0tpi1iAh62GyS2IO+tYM/seIjhhny4", '1');
+  ("admin", 'admin@gmail.com', "$argon2id$v=19$m=65536,t=5,p=1$03NmfWlLIBE0woTiJvADKA$VqPe3FJVqk28F0tpi1iAh62GyS2IO+tYM/seIjhhny4", '1');
 
 
-INSERT INTO task (title, detail, task_done, task_archived, task_priority, due_date) 
+INSERT INTO task (title, detail, task_done, task_archived, task_priority, due_date, user_id) 
 VALUES 
-("tâche 1", "detail de la tâche 1", 0, 0, 1, "2023-08-10"),
-("tâche 2", "detail de la tâche 2", 0, 0, 2, "2023-08-21"),
-("tâche 3", "detail de la tâche 3", 0, 0, 3, "2023-08-31"),
-("tâche 4", "detail de la tâche 4", 0, 0, 4, "2023-01-31");
+("tâche 1", "detail de la tâche 1", 0, 0, 1, "2023-09-04", 6),
+("tâche 2", "detail de la tâche 2", 0, 0, 2, "2023-09-10", 6),
+("tâche 3", "detail de la tâche 3", 0, 0, 3, "2023-10-10", 6),
+("tâche 4", "detail de la tâche 4", 0, 0, 4, "2023-01-31", 6);
